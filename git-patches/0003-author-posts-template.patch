@@ -1,0 +1,65 @@
+From 763a26eeff4a2b38bb4a50897871cb631ba7a0a3 Mon Sep 17 00:00:00 2001
+From: Lesson 8 local preparation <local-preparation@example.invalid>
+Date: Sun, 4 Oct 2026 22:16:37 +0000
+Subject: [PATCH 03/10] author posts template
+
+---
+ blog/urls.py                |  1 +
+ blog/views.py               | 10 ++++++++++
+ templates/author_posts.html | 16 ++++++++++++++++
+ 3 files changed, 27 insertions(+)
+ create mode 100644 templates/author_posts.html
+
+diff --git a/blog/urls.py b/blog/urls.py
+index ed9226d..bbbb74a 100644
+--- a/blog/urls.py
++++ b/blog/urls.py
+@@ -12,4 +12,5 @@ urlpatterns = [
+     path("categories/<slug:category_slug>/", views.category_detail, name="category_detail"),
+     path("about/", views.about, name="about"),
+     path("contact/", views.contact, name="contact"),
++    path("author/<str:name>/", views.author_posts, name="author_posts"),
+ ]
+diff --git a/blog/views.py b/blog/views.py
+index e3ecaa2..5924e69 100644
+--- a/blog/views.py
++++ b/blog/views.py
+@@ -40,3 +40,13 @@ def about(request):
+ 
+ def contact(request):
+     return render(request, "contact.html")
++
++
++def author_posts(request, name):
++    author_post_list = []
++    for post in POSTS:
++        if post["author"] == name:
++            author_post_list.append(post)
++    return render(request, "author_posts.html", {
++        "author": name, "posts": author_post_list,
++    })
+diff --git a/templates/author_posts.html b/templates/author_posts.html
+new file mode 100644
+index 0000000..9614f68
+--- /dev/null
++++ b/templates/author_posts.html
+@@ -0,0 +1,16 @@
++{% extends "base.html" %}
++{% block title %}@{{ author }} - müəllifin postları{% endblock %}
++{% block content %}
++<section class="page-intro">
++    <p class="eyebrow">Müəllif</p>
++    <h1>@{{ author }} - postlar</h1>
++    <p>Müəllifin paylaşdığı yazılar.</p>
++</section>
++<div class="card-grid">
++    {% for post in posts %}
++        {% include "partials/_post_card.html" %}
++    {% empty %}
++        <p class="empty-state">Bu müəllifin hələ postu yoxdur.</p>
++    {% endfor %}
++</div>
++{% endblock %}
+-- 
+2.47.3
+

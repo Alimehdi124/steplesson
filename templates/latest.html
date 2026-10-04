@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Son postlar{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">Yeni yazılar</p><h1>Son 3 post</h1><p>Ən son əlavə edilən yazılar.</p></section>
+<div class="latest-list">
+    {% for post in posts %}
+    <div class="list-row">
+        <span class="list-index">{{ forloop.counter }}.</span>
+        <div class="list-row-main"><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></div>
+        <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d.m.Y" }}</time>
+    </div>
+    {% empty %}
+        <p class="empty-state">Hələ post yoxdur.</p>
+    {% endfor %}
+</div>
+{% endblock %}

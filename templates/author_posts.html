@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}@{{ author }} - müəllifin postları{% endblock %}
+{% block content %}
+<section class="page-intro">
+    <p class="eyebrow">Müəllif</p>
+    <h1>@{{ author }} - postlar</h1>
+    <p>Müəllifin paylaşdığı yazılar.</p>
+</section>
+<div class="card-grid">
+    {% for post in posts %}
+        {% include "partials/_post_card.html" %}
+    {% empty %}
+        <p class="empty-state">Bu müəllifin hələ postu yoxdur.</p>
+    {% endfor %}
+</div>
+{% endblock %}

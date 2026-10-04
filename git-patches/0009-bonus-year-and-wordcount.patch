@@ -1,0 +1,39 @@
+From 127576a2eb181f723bf5b63645e66e53e5477dde Mon Sep 17 00:00:00 2001
+From: Lesson 8 local preparation <local-preparation@example.invalid>
+Date: Sun, 4 Oct 2026 22:16:40 +0000
+Subject: [PATCH 09/10] bonus year and wordcount
+
+---
+ templates/base.html        | 2 +-
+ templates/post_detail.html | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/templates/base.html b/templates/base.html
+index 5054415..a262b6e 100644
+--- a/templates/base.html
++++ b/templates/base.html
+@@ -19,7 +19,7 @@
+         {% block content %}{% endblock %}
+     </main>
+     <footer class="site-footer">
+-        <div class="shell footer-inner"><span>STEP IT Academy · Python Web Development</span><span>© 2026 STEP Blog</span></div>
++        <div class="shell footer-inner"><span>STEP IT Academy · Python Web Development</span><span>© {% now "Y" %} STEP Blog</span></div>
+     </footer>
+     <script src="{% static 'js/app.js' %}"></script>
+ </body>
+diff --git a/templates/post_detail.html b/templates/post_detail.html
+index 6952ba4..fe1b0b5 100644
+--- a/templates/post_detail.html
++++ b/templates/post_detail.html
+@@ -2,7 +2,7 @@
+ {% block title %}{{ post.title }}{% endblock %}
+ {% block content %}
+ <article class="paper reading-width">
+-    <div class="post-card-top"><span class="pill">{{ post.category }}</span><time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d.m.Y" }}</time></div>
++    <div class="post-card-top"><span class="pill">{{ post.category }}</span><time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d.m.Y" }}</time><span class="muted">{{ post.content|wordcount }} söz</span></div>
+     <h1>{{ post.title }}</h1>
+     <p class="byline">Müəllif: <a class="author" href="{% url 'blog:author_posts' post.author %}">@{{ post.author }}</a></p>
+     <div class="article-body">{{ post.content|linebreaks }}</div>
+-- 
+2.47.3
+

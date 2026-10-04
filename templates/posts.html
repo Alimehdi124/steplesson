@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Postlar{% endblock %}
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">STEP IT Academy · Blog</p>
+    <h1>Yazılar və hekayələr</h1>
+    <p>Proqramlaşdırma, oyunlar və kitablar haqqında son yazıları kəşf et.</p>
+</section>
+<div class="section-head"><h2>Bütün postlar</h2><span class="muted">{{ posts|length }} yazı</span></div>
+<div class="card-grid">
+    {% for post in posts %}
+        {% include "partials/_post_card.html" %}
+    {% empty %}
+        <p class="empty-state">Hələ post yoxdur.</p>
+    {% endfor %}
+</div>
+{% endblock %}

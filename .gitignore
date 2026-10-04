@@ -1,0 +1,20 @@
+# Python bytecode and local build files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# Virtual environments and local databases
+.venv/
+venv/
+db.sqlite3
+db.sqlite3-journal
+
+# Editors / operating system
+.idea/
+.vscode/
+.DS_Store

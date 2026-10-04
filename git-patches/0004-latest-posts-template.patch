@@ -1,0 +1,72 @@
+From 658668557a31c454f02b0e997547d0310225cfc6 Mon Sep 17 00:00:00 2001
+From: Lesson 8 local preparation <local-preparation@example.invalid>
+Date: Sun, 4 Oct 2026 22:16:38 +0000
+Subject: [PATCH 04/10] latest posts template
+
+---
+ blog/urls.py          |  1 +
+ blog/views.py         |  4 ++++
+ templates/base.html   |  1 +
+ templates/latest.html | 16 ++++++++++++++++
+ 4 files changed, 22 insertions(+)
+ create mode 100644 templates/latest.html
+
+diff --git a/blog/urls.py b/blog/urls.py
+index bbbb74a..0b9b33a 100644
+--- a/blog/urls.py
++++ b/blog/urls.py
+@@ -13,4 +13,5 @@ urlpatterns = [
+     path("about/", views.about, name="about"),
+     path("contact/", views.contact, name="contact"),
+     path("author/<str:name>/", views.author_posts, name="author_posts"),
++    path("latest/", views.latest, name="latest"),
+ ]
+diff --git a/blog/views.py b/blog/views.py
+index 5924e69..eb9b6a2 100644
+--- a/blog/views.py
++++ b/blog/views.py
+@@ -50,3 +50,7 @@ def author_posts(request, name):
+     return render(request, "author_posts.html", {
+         "author": name, "posts": author_post_list,
+     })
++
++
++def latest(request):
++    return render(request, "latest.html", {"posts": POSTS[-3:]})
+diff --git a/templates/base.html b/templates/base.html
+index e531f2b..897228d 100644
+--- a/templates/base.html
++++ b/templates/base.html
+@@ -14,6 +14,7 @@
+             <a href="{% url 'blog:post_list' %}" class="brand" aria-label="STEP Blog - Ana səhifə"><span class="brand-mark">S</span>STEP <strong>Blog</strong></a>
+             <nav class="navbar" aria-label="Əsas menyu">
+                 <a href="{% url 'blog:post_list' %}">Postlar</a>
++                <a href="{% url 'blog:latest' %}">Son postlar</a>
+                 <a href="{% url 'blog:category_list' %}">Kateqoriyalar</a>
+                 <a href="{% url 'blog:about' %}">Haqqımızda</a>
+                 <a href="{% url 'blog:contact' %}">Əlaqə</a>
+diff --git a/templates/latest.html b/templates/latest.html
+new file mode 100644
+index 0000000..48cdfce
+--- /dev/null
++++ b/templates/latest.html
+@@ -0,0 +1,16 @@
++{% extends "base.html" %}
++{% block title %}Son postlar{% endblock %}
++{% block content %}
++<section class="page-intro"><p class="eyebrow">Yeni yazılar</p><h1>Son 3 post</h1><p>Ən son əlavə edilən yazılar.</p></section>
++<div class="latest-list">
++    {% for post in posts %}
++    <div class="list-row">
++        <span class="list-index">{{ forloop.counter }}.</span>
++        <div class="list-row-main"><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></div>
++        <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d.m.Y" }}</time>
++    </div>
++    {% empty %}
++        <p class="empty-state">Hələ post yoxdur.</p>
++    {% endfor %}
++</div>
++{% endblock %}
+-- 
+2.47.3
+

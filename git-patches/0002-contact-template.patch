@@ -1,0 +1,69 @@
+From 591c1d7fd29c424ef4aaf71483e34ca969e3c2d2 Mon Sep 17 00:00:00 2001
+From: Lesson 8 local preparation <local-preparation@example.invalid>
+Date: Sun, 4 Oct 2026 22:16:36 +0000
+Subject: [PATCH 02/10] contact template
+
+---
+ blog/urls.py           |  1 +
+ blog/views.py          |  4 ++++
+ templates/base.html    |  1 +
+ templates/contact.html | 13 +++++++++++++
+ 4 files changed, 19 insertions(+)
+ create mode 100644 templates/contact.html
+
+diff --git a/blog/urls.py b/blog/urls.py
+index 229cca5..ed9226d 100644
+--- a/blog/urls.py
++++ b/blog/urls.py
+@@ -11,4 +11,5 @@ urlpatterns = [
+     path("categories/", views.category_list, name="category_list"),
+     path("categories/<slug:category_slug>/", views.category_detail, name="category_detail"),
+     path("about/", views.about, name="about"),
++    path("contact/", views.contact, name="contact"),
+ ]
+diff --git a/blog/views.py b/blog/views.py
+index 680c366..e3ecaa2 100644
+--- a/blog/views.py
++++ b/blog/views.py
+@@ -36,3 +36,7 @@ def category_detail(request, category_slug):
+ 
+ def about(request):
+     return render(request, "about.html")
++
++
++def contact(request):
++    return render(request, "contact.html")
+diff --git a/templates/base.html b/templates/base.html
+index cc17c6d..e531f2b 100644
+--- a/templates/base.html
++++ b/templates/base.html
+@@ -16,6 +16,7 @@
+                 <a href="{% url 'blog:post_list' %}">Postlar</a>
+                 <a href="{% url 'blog:category_list' %}">Kateqoriyalar</a>
+                 <a href="{% url 'blog:about' %}">Haqqımızda</a>
++                <a href="{% url 'blog:contact' %}">Əlaqə</a>
+             </nav>
+         </div>
+     </header>
+diff --git a/templates/contact.html b/templates/contact.html
+new file mode 100644
+index 0000000..0d4c943
+--- /dev/null
++++ b/templates/contact.html
+@@ -0,0 +1,13 @@
++{% extends "base.html" %}
++{% block title %}Əlaqə{% endblock %}
++{% block content %}
++<section class="paper reading-width">
++    <p class="eyebrow">Bizimlə əlaqə</p>
++    <h1>Əlaqə</h1>
++    <p>Suallarınızı aşağıdakı əlaqə vasitələri ilə göndərə bilərsiniz. Bu tapşırıq üçün nümunə əlaqə məlumatlarıdır.</p>
++    <ul class="list">
++        <li><strong>Email:</strong> <a class="text-link" href="mailto:info@example.com">info@example.com</a></li>
++        <li><strong>Telefon:</strong> <a class="text-link" href="tel:+994501234567">+994 50 123 45 67</a></li>
++    </ul>
++</section>
++{% endblock %}
+-- 
+2.47.3
+

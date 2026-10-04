@@ -1,0 +1,48 @@
+From 6caae7ebd090d605748cc82c350febbbfcf32eaf Mon Sep 17 00:00:00 2001
+From: Lesson 8 local preparation <local-preparation@example.invalid>
+Date: Sun, 4 Oct 2026 22:16:39 +0000
+Subject: [PATCH 07/10] navbar partial
+
+---
+ templates/base.html            | 9 +--------
+ templates/partials/navbar.html | 8 ++++++++
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+ create mode 100644 templates/partials/navbar.html
+
+diff --git a/templates/base.html b/templates/base.html
+index 19c910c..5054415 100644
+--- a/templates/base.html
++++ b/templates/base.html
+@@ -12,14 +12,7 @@
+     <header class="site-header">
+         <div class="shell header-inner">
+             <a href="{% url 'blog:post_list' %}" class="brand" aria-label="STEP Blog - Ana səhifə"><span class="brand-mark">S</span>STEP <strong>Blog</strong></a>
+-            <nav class="navbar" aria-label="Əsas menyu">
+-                <a href="{% url 'blog:post_list' %}">Postlar</a>
+-                <a href="{% url 'blog:latest' %}">Son postlar</a>
+-                <a href="{% url 'blog:category_list' %}">Kateqoriyalar</a>
+-                <a href="{% url 'blog:stats' %}">Statistika</a>
+-                <a href="{% url 'blog:about' %}">Haqqımızda</a>
+-                <a href="{% url 'blog:contact' %}">Əlaqə</a>
+-            </nav>
++            {% include "partials/navbar.html" %}
+         </div>
+     </header>
+     <main class="shell main-content">
+diff --git a/templates/partials/navbar.html b/templates/partials/navbar.html
+new file mode 100644
+index 0000000..ca21d02
+--- /dev/null
++++ b/templates/partials/navbar.html
+@@ -0,0 +1,8 @@
++<nav class="navbar" aria-label="Əsas menyu">
++                <a href="{% url 'blog:post_list' %}">Postlar</a>
++                <a href="{% url 'blog:latest' %}">Son postlar</a>
++                <a href="{% url 'blog:category_list' %}">Kateqoriyalar</a>
++                <a href="{% url 'blog:stats' %}">Statistika</a>
++                <a href="{% url 'blog:about' %}">Haqqımızda</a>
++                <a href="{% url 'blog:contact' %}">Əlaqə</a>
++</nav>
+-- 
+2.47.3
+

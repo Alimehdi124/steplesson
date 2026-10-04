@@ -1,0 +1,65 @@
+From b8068a2c1104c2bc16eb5b664451c27b1c7806b6 Mon Sep 17 00:00:00 2001
+From: Lesson 8 local preparation <local-preparation@example.invalid>
+Date: Sun, 4 Oct 2026 22:16:38 +0000
+Subject: [PATCH 05/10] stats template
+
+---
+ blog/urls.py         | 1 +
+ blog/views.py        | 4 ++++
+ templates/base.html  | 1 +
+ templates/stats.html | 9 +++++++++
+ 4 files changed, 15 insertions(+)
+ create mode 100644 templates/stats.html
+
+diff --git a/blog/urls.py b/blog/urls.py
+index 0b9b33a..97e2434 100644
+--- a/blog/urls.py
++++ b/blog/urls.py
+@@ -14,4 +14,5 @@ urlpatterns = [
+     path("contact/", views.contact, name="contact"),
+     path("author/<str:name>/", views.author_posts, name="author_posts"),
+     path("latest/", views.latest, name="latest"),
++    path("stats/", views.stats, name="stats"),
+ ]
+diff --git a/blog/views.py b/blog/views.py
+index eb9b6a2..f86151a 100644
+--- a/blog/views.py
++++ b/blog/views.py
+@@ -54,3 +54,7 @@ def author_posts(request, name):
+ 
+ def latest(request):
+     return render(request, "latest.html", {"posts": POSTS[-3:]})
++
++
++def stats(request):
++    return render(request, "stats.html", {"posts": POSTS, "categories": CATEGORIES})
+diff --git a/templates/base.html b/templates/base.html
+index 897228d..19c910c 100644
+--- a/templates/base.html
++++ b/templates/base.html
+@@ -16,6 +16,7 @@
+                 <a href="{% url 'blog:post_list' %}">Postlar</a>
+                 <a href="{% url 'blog:latest' %}">Son postlar</a>
+                 <a href="{% url 'blog:category_list' %}">Kateqoriyalar</a>
++                <a href="{% url 'blog:stats' %}">Statistika</a>
+                 <a href="{% url 'blog:about' %}">Haqqımızda</a>
+                 <a href="{% url 'blog:contact' %}">Əlaqə</a>
+             </nav>
+diff --git a/templates/stats.html b/templates/stats.html
+new file mode 100644
+index 0000000..cf034ee
+--- /dev/null
++++ b/templates/stats.html
+@@ -0,0 +1,9 @@
++{% extends "base.html" %}
++{% block title %}Statistika{% endblock %}
++{% block content %}
++<section class="page-intro"><p class="eyebrow">Rəqəmlərlə blog</p><h1>Statistika</h1><p>Blogdakı post və kateqoriyaların sayı.</p></section>
++<div class="stats-grid">
++    <div class="stat-card"><strong>{{ posts|length }}</strong><span>Post sayı</span></div>
++    <div class="stat-card"><strong>{{ categories|length }}</strong><span>Kateqoriya sayı</span></div>
++</div>
++{% endblock %}
+-- 
+2.47.3
+

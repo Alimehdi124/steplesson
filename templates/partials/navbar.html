@@ -1,0 +1,8 @@
+<nav class="navbar" aria-label="Əsas menyu">
+    <a href="{% url 'blog:post_list' %}" {% if request.resolver_match.url_name == 'post_list' or request.resolver_match.url_name == 'posts_list' or request.resolver_match.url_name == 'post_detail' or request.resolver_match.url_name == 'author_posts' %}class="active" aria-current="page"{% endif %}>Postlar</a>
+    <a href="{% url 'blog:latest' %}" {% if request.resolver_match.url_name == 'latest' %}class="active" aria-current="page"{% endif %}>Son postlar</a>
+    <a href="{% url 'blog:category_list' %}" {% if request.resolver_match.url_name == 'category_list' or request.resolver_match.url_name == 'category_detail' %}class="active" aria-current="page"{% endif %}>Kateqoriyalar</a>
+    <a href="{% url 'blog:stats' %}" {% if request.resolver_match.url_name == 'stats' %}class="active" aria-current="page"{% endif %}>Statistika</a>
+    <a href="{% url 'blog:about' %}" {% if request.resolver_match.url_name == 'about' %}class="active" aria-current="page"{% endif %}>Haqqımızda</a>
+    <a href="{% url 'blog:contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active" aria-current="page"{% endif %}>Əlaqə</a>
+</nav>

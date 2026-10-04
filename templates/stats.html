@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Statistika{% endblock %}
+{% block content %}
+<section class="page-intro"><p class="eyebrow">Rəqəmlərlə blog</p><h1>Statistika</h1><p>Blogdakı post və kateqoriyaların sayı.</p></section>
+<div class="stats-grid">
+    <div class="stat-card"><strong>{{ posts|length }}</strong><span>Post sayı</span></div>
+    <div class="stat-card"><strong>{{ categories|length }}</strong><span>Kateqoriya sayı</span></div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<article class="post-card">
+    <div class="post-card-top">
+        <span class="pill">{{ post.category }}</span>
+        <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d.m.Y" }}</time>
+    </div>
+    <h2><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h2>
+    <p class="excerpt">{{ post.content|truncatewords:25 }}</p>
+    <div class="post-card-bottom">
+        <a class="author" href="{% url 'blog:author_posts' post.author %}">@{{ post.author }}</a>
+        <a class="text-link" href="{% url 'blog:post_detail' post.id %}">Ətraflı oxu <span aria-hidden="true">→</span></a>
+    </div>
+</article>

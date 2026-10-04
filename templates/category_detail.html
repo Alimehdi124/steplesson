@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block content %}
+<section class="page-intro">
+    <p class="eyebrow">Kateqoriya</p>
+    <h1>{{ category.name }}</h1>
+    <p>{{ category.description }}</p>
+</section>
+<div class="card-grid">
+    {% for post in posts %}
+        {% include "partials/_post_card.html" %}
+    {% empty %}
+        <p class="empty-state">Bu kateqoriyada hələ post yoxdur.</p>
+    {% endfor %}
+</div>
+{% endblock %}

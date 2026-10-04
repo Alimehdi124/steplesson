@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<article class="paper reading-width">
+    <div class="post-card-top"><span class="pill">{{ post.category }}</span><time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:"d.m.Y" }}</time><span class="muted">{{ post.content|wordcount }} söz</span></div>
+    <h1>{{ post.title }}</h1>
+    <p class="byline">Müəllif: <a class="author" href="{% url 'blog:author_posts' post.author %}">@{{ post.author }}</a></p>
+    <div class="article-body">{{ post.content|linebreaks }}</div>
+    <a class="text-link back-link" href="{% url 'blog:post_list' %}">← Bütün postlar</a>
+</article>
+{% endblock %}
